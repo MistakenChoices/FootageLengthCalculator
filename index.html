@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Footage Calculator</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        label {
+            display: block;
+            margin-top: 20px;
+        }
+        input[type="number"] {
+            padding: 10px;
+        }
+        #result {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Footage Calculator</h1>
+    <label for="interval">Choose your picture time interval (in seconds):</label>
+    <input type="number" id="interval" value="60">
+    <label for="max-pictures">Enter the maximum number of pictures you can take:</label>
+    <input type="number" id="max-pictures" value="9999">
+    <button id="calculate">Calculate</button>
+    <div id="result"></div>
+    <br>
+    <br>
+    <h1>Calculate Total Time</h1>
+    <label for="pics-taken">Enter the total number of pictures you have taken:</label>
+    <input type="number" id="pics-taken" value="0">
+    <label for="time-interval">Enter how often the pictures were taken (in seconds):</label>
+    <input type="number" id="time-interval" value="60">
+    <button id="calculate-duration">Calculate Duration</button>
+    <div id="duration"></div>
+
+    <script>
+        document.getElementById('calculate').addEventListener('click', function() {
+            const interval = parseInt(document.getElementById('interval').value);
+            const maxPictures = parseInt(document.getElementById('max-pictures').value);
+            const totalSeconds = interval * maxPictures;
+            const days = Math.floor(totalSeconds / 86400);
+            const hours = Math.floor((totalSeconds % 86400) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            const result = document.getElementById('result');
+            result.innerHTML = `Total footage: ${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds.`;
+        });
+
+        document.getElementById('calculate-duration').addEventListener('click', function() {
+            const picsTaken = parseInt(document.getElementById('pics-taken').value);
+            const timeInterval = parseInt(document.getElementById('time-interval').value);
+            const totalSeconds = picsTaken * timeInterval;
+            const days = Math.floor(totalSeconds / 86400);
+            const hours = Math.floor((totalSeconds % 86400) / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            const duration = document.getElementById('duration');
+            duration.innerHTML = `Footage duration: ${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds.`;
+        });
+    </script>
+</body>
+</html>
